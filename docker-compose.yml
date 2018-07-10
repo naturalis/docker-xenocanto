@@ -7,8 +7,6 @@ services:
     environment:
       MINIO_ACCESS_KEY: ${MINIO_ACCESS_KEY:-12345}
       MINIO_SECRET_KEY: ${MINIO_SECRET_KEY:-12345678}
-    ports:
-      - "9000:9000"
     volumes:
       - "/data/minio:/data"
       - "/data/minioconfig:/root/.minio"
@@ -33,7 +31,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       - ${TRAEFIK_TOML_FILE:-./traefik.dev.toml}:/traefik.toml
       - ${ACME_JSON:-./acme.json}:/acme.json
-
+      - /etc/letsencrypt:/etc/letsencrypt
 # run docker network create web before
 networks:
   web:
